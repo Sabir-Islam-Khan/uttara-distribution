@@ -24,7 +24,6 @@
 
         html {
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
         }
 
         body {
@@ -112,15 +111,12 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            height: auto;
-            /* Remove fixed height */
+            height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
+            overflow: hidden;
             background: linear-gradient(135deg, rgba(74, 109, 229, 0.1) 0%, rgba(56, 178, 172, 0.1) 100%);
-            padding: 120px 0 60px;
-            /* Add padding to account for fixed header */
         }
 
         .hero-bg {
@@ -129,9 +125,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            /* Ensure background doesn't interfere with scrolling */
+            z-index: -1;
         }
 
         .blob {
@@ -173,10 +167,6 @@
         .hero-content {
             max-width: 600px;
             animation: fadeInUp 1s ease-out;
-            position: relative;
-            /* Add position relative */
-            z-index: 2;
-            /* Ensure content stays above blobs */
         }
 
         .hero h1 {
@@ -731,113 +721,6 @@
             .brands-grid {
                 grid-template-columns: 1fr;
             }
-
-            .header-container {
-                padding: 10px 15px;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-                /* Smaller logo text */
-            }
-
-            /* Improve mobile menu */
-            nav ul {
-                background-color: rgba(255, 255, 255, 0.95);
-                /* Semi-transparent background */
-                backdrop-filter: blur(10px);
-                /* Blur effect for better readability */
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            }
-
-            nav ul li {
-                width: 100%;
-                text-align: center;
-                margin: 20px 0;
-            }
-
-            nav ul li a {
-                font-size: 1.2rem;
-                padding: 10px 0;
-                display: block;
-            }
-
-            /* Hero section adjustments */
-            .hero {
-                padding: 100px 0 50px;
-                /* Adjust padding for mobile */
-                min-height: 100vh;
-                height: auto;
-            }
-
-            .hero-content {
-                padding: 0 15px;
-            }
-
-            .hero-btns {
-                justify-content: center;
-            }
-
-            .btn {
-                width: 100%;
-                /* Full width buttons */
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-            /* Brand cards adjustments */
-            .brand-card {
-                height: 200px;
-                /* Slightly smaller cards */
-            }
-
-            .brand-image {
-                height: 140px;
-            }
-
-            /* About section */
-            .about-container {
-                padding: 0 15px;
-            }
-
-            .about-image {
-                margin: -20px -15px 30px;
-                /* Negative margin for full-width image */
-                border-radius: 0;
-            }
-
-            /* Contact form improvements */
-            .contact-form {
-                padding: 25px;
-                margin: 0 -15px;
-                /* Full width on mobile */
-                border-radius: 0;
-            }
-
-            .form-control {
-                font-size: 16px;
-                /* Prevent zoom on iOS */
-                padding: 12px;
-            }
-
-            /* Footer adjustments */
-            .footer-col {
-                text-align: center;
-                padding: 0 15px;
-            }
-
-            .footer-col h4:after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .footer-links a {
-                justify-content: center;
-            }
         }
 
         @media (max-width: 576px) {
@@ -851,33 +734,6 @@
 
             .footer-container {
                 grid-template-columns: 1fr;
-            }
-
-            .btn {
-                padding: 15px 30px;
-                /* Larger touch targets */
-                margin-bottom: 15px;
-            }
-
-            .contact-item {
-                padding: 15px 0;
-            }
-
-            .footer-links li {
-                padding: 12px 0;
-            }
-
-            .social-link {
-                width: 50px;
-                /* Larger social icons */
-                height: 50px;
-            }
-        }
-
-        /* Fix for iOS form inputs */
-        @supports (-webkit-touch-callout: none) {
-            .form-control {
-                font-size: 16px;
             }
         }
     </style>
@@ -1199,37 +1055,6 @@
             alert('Thank you for your message. We will get back to you soon!');
             contactForm.reset();
         });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.mobile-menu-btn') && !e.target.closest('#menuItems')) {
-                menuItems.classList.remove('active');
-            }
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#menuItems a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuItems.classList.remove('active');
-            });
-        });
-
-        // Add touch feedback
-        document.querySelectorAll('.btn, .brand-card, .social-link').forEach(element => {
-            element.addEventListener('touchstart', () => {
-                element.style.opacity = '0.8';
-            });
-            element.addEventListener('touchend', () => {
-                element.style.opacity = '1';
-            });
-        });
-
-        // Prevent pull-to-refresh on iOS
-        document.body.addEventListener('touchmove', (e) => {
-            if (window.pageYOffset === 0) {
-                e.preventDefault();
-            }
-        }, { passive: false });
     </script>
 </body>
 
