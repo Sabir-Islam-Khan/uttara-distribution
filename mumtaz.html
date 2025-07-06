@@ -271,21 +271,7 @@
             transform: scale(1);
         }
 
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
 
-        .product-info h3 {
-            font-size: 1.2rem;
-            color: var(--dark);
-            margin-bottom: 8px;
-        }
-
-        .product-info p {
-            color: #5a6474;
-            font-size: 0.9rem;
-        }
 
         /* Modal for Image Preview */
         .modal {
@@ -524,20 +510,16 @@
 
                     productCard.innerHTML = `
                         <div class="product-image">
-                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            <img src="${product.image}" alt="Mumtaz Product ${product.id}" loading="lazy">
                             <div class="product-overlay">
                                 <i class="fas fa-search-plus zoom-icon"></i>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>${product.name}</h3>
-                            <p>${product.description}</p>
                         </div>
                     `;
 
                     // Add click event for modal
                     productCard.addEventListener('click', () => {
-                        openModal(product.image, product.name);
+                        openModal(product.image, `Mumtaz Product ${product.id}`);
                     });
 
                     productGrid.appendChild(productCard);
