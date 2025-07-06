@@ -166,132 +166,88 @@
             z-index: 2;
         }
 
-        /* PDF Section */
-        .pdf-section {
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            margin-bottom: 40px;
+        /* Image Gallery Section */
+        .gallery-section {
+            margin-bottom: 60px;
         }
 
-        .pdf-header {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            padding: 30px;
+        .section-title {
             text-align: center;
+            margin-bottom: 50px;
         }
 
-        .pdf-header h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .pdf-header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .pdf-controls {
-            padding: 20px;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .pdf-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background-color: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .pdf-btn:hover {
-            background-color: #3a5dd0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(74, 109, 229, 0.3);
-        }
-
-        .pdf-btn.secondary {
-            background-color: var(--accent);
-        }
-
-        .pdf-btn.secondary:hover {
-            background-color: #2a9086;
-        }
-
-        .pdf-btn.danger {
-            background-color: var(--secondary);
-        }
-
-        .pdf-btn.danger:hover {
-            background-color: #e55656;
-        }
-
-        /* PDF Preview */
-        .pdf-preview-container {
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
             position: relative;
-            height: 600px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #5a6474;
+            margin-top: 20px;
+        }
+
+        .images-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 3px solid #dee2e6;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .image-card {
+            background-color: white;
             border-radius: 15px;
             overflow: hidden;
-        }
-
-        .pdf-preview-container:hover {
-            border-color: var(--primary);
-            box-shadow: 0 15px 40px rgba(74, 109, 229, 0.2);
-        }
-
-        .pdf-preview-content {
-            display: flex;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            max-width: 800px;
+            margin: 0 auto;
             width: 100%;
-            height: 100%;
-            position: relative;
         }
 
-        .pdf-thumbnail-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-wrapper {
             position: relative;
+            width: 100%;
+            aspect-ratio: 0.707;
+            /* A4 ratio (1:√2) */
             overflow: hidden;
         }
 
-        .pdf-thumbnail {
+        .image-wrapper img {
             width: 100%;
             height: 100%;
-            border: none;
-            pointer-events: none;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            object-fit: contain;
+            background-color: #f8f9fa;
+            transition: transform 0.5s ease;
         }
 
-        .pdf-preview-container:hover .pdf-thumbnail {
-            transform: scale(0.85);
+        .image-card:hover .image-wrapper img {
+            transform: scale(1.05);
         }
 
-        .pdf-overlay {
+        .image-overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -303,240 +259,69 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2;
         }
 
-        .pdf-preview-container:hover .pdf-overlay {
+        .image-card:hover .image-overlay {
             opacity: 1;
         }
 
-        .overlay-content {
-            text-align: center;
+        .zoom-icon {
             color: white;
-        }
-
-        .play-icon {
-            width: 80px;
-            height: 80px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border: 3px solid white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 2rem;
+            font-size: 3rem;
+            transform: scale(0.8);
             transition: transform 0.3s ease;
         }
 
-        .pdf-preview-container:hover .play-icon {
-            transform: scale(1.1);
+        .image-card:hover .zoom-icon {
+            transform: scale(1);
         }
 
-        .overlay-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .pdf-info-section {
-            flex: 0 0 300px;
-            padding: 40px 30px;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-        }
-
-        .pdf-info-section::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 20%;
-            bottom: 20%;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-
-        .pdf-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 25px rgba(74, 109, 229, 0.3);
-        }
-
-        .pdf-preview-text h3 {
-            font-size: 1.8rem;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        .pdf-preview-text p {
-            color: #5a6474;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .preview-play-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .preview-play-btn:hover {
-            background-color: #3a5dd0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 109, 229, 0.4);
-        }
-
-        .pdf-fallback-preview {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .pdf-fallback-preview.show {
-            display: flex;
-        }
-
-        .fallback-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: white;
-            font-size: 3rem;
-            box-shadow: 0 10px 30px rgba(74, 109, 229, 0.3);
-        }
-
-        /* Fullscreen Modal */
-        .pdf-modal {
+        /* Modal for Image Preview */
+        .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 2000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
             animation: fadeIn 0.3s ease;
         }
 
-        .pdf-modal.active {
-            display: block;
-        }
-
-        .modal-header {
+        .modal-content {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 2001;
-        }
-
-        .modal-title {
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .modal-controls {
-            display: flex;
-            gap: 10px;
-        }
-
-        .modal-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .modal-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 5px;
-            transition: opacity 0.3s ease;
-        }
-
-        .close-modal:hover {
-            opacity: 0.7;
-        }
-
-        .pdf-modal-content {
-            position: absolute;
-            top: 60px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            background-color: white;
-            border-radius: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .modal-pdf-viewer {
+        .modal-content img {
             width: 100%;
-            height: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: opacity 0.3s ease;
+            background: none;
             border: none;
         }
 
-        .modal-fallback {
-            display: none;
-            padding: 60px 40px;
-            text-align: center;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-fallback.show {
-            display: flex;
+        .close-modal:hover {
+            opacity: 0.7;
         }
 
         @keyframes fadeIn {
@@ -548,6 +333,45 @@
                 opacity: 1;
             }
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(74, 109, 229, 0.1);
+            border-left: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
 
         /* Loading Spinner */
         .loading-spinner {
@@ -610,51 +434,20 @@
                 font-size: 1rem;
             }
 
-            .pdf-preview-container {
-                height: auto;
-                min-height: 500px;
+            .images-container {
+                gap: 20px;
             }
 
-            .pdf-preview-content {
-                flex-direction: column;
-            }
-
-            .pdf-thumbnail-section {
-                height: 300px;
-                order: 2;
-            }
-
-            .pdf-info-section {
-                flex: none;
-                order: 1;
-                padding: 30px 20px;
-            }
-
-            .pdf-info-section::before {
-                display: none;
-            }
-
-            .pdf-controls {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .pdf-btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
+            .image-card {
+                max-width: 100%;
             }
 
             main {
                 margin-top: 120px;
             }
 
-            .pdf-header h2 {
-                font-size: 1.6rem;
-            }
-
-            .pdf-header p {
-                font-size: 1rem;
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
 
@@ -663,35 +456,13 @@
                 font-size: 1.8rem;
             }
 
-            .pdf-preview-container {
-                height: auto;
-                min-height: 400px;
-            }
-
-            .pdf-thumbnail-section {
-                height: 250px;
-            }
-
-            .pdf-info-section {
-                padding: 25px 15px;
-            }
-
-            .pdf-preview-text h3 {
-                font-size: 1.5rem;
-            }
-
-            .pdf-preview-text p {
-                font-size: 0.9rem;
+            .images-container {
+                gap: 15px;
             }
 
             .back-btn {
                 padding: 8px 16px;
                 font-size: 0.9rem;
-            }
-
-            .pdf-btn {
-                width: 100%;
-                max-width: 250px;
             }
         }
 
@@ -699,7 +470,6 @@
         @media print {
 
             header,
-            .pdf-controls,
             .back-btn {
                 display: none !important;
             }
@@ -708,9 +478,11 @@
                 margin-top: 0;
             }
 
-            .pdf-section {
+            .image-card {
                 box-shadow: none;
                 border: 1px solid #ddd;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -741,205 +513,97 @@
                     and innovative solutions for modern living.</p>
             </div>
 
-            <!-- PDF Section -->
-            <div class="pdf-section">
-                <div class="pdf-header">
-                    <h2>Product Catalog</h2>
-                    <p>Browse through our complete Godrej product range and specifications</p>
+            <!-- Image Gallery -->
+            <div class="gallery-section">
+                <div class="section-title">
+                    <h2>Product Gallery</h2>
+                    <p>Browse through our complete collection of Godrej product images</p>
                 </div>
 
-                <div class="pdf-controls">
-                    <a href="images/godrej/godrej.pdf" download class="pdf-btn">
-                        <i class="fas fa-download"></i>
-                        Download PDF
-                    </a>
-                    <button onclick="printPDF()" class="pdf-btn secondary">
-                        <i class="fas fa-print"></i>
-                        Print
-                    </button>
-                    <a href="images/godrej/godrej.pdf" target="_blank" class="pdf-btn danger">
-                        <i class="fas fa-external-link-alt"></i>
-                        Open in Tab
-                    </a>
+                <div id="imagesContainer" class="images-container">
+                    <!-- Images will be loaded here by JavaScript -->
                 </div>
 
-                <div class="pdf-preview-container" onclick="openPDFModal()">
-                    <div class="pdf-preview-content">
-                        <div class="pdf-thumbnail-section">
-                            <iframe id="pdfThumbnail" class="pdf-thumbnail"
-                                src="images/godrej/godrej.pdf#page=1&zoom=75&toolbar=0&navpanes=0&scrollbar=0"
-                                title="PDF Preview">
-                            </iframe>
-                            <div class="pdf-overlay">
-                                <div class="overlay-content">
-                                    <div class="play-icon">
-                                        <i class="fas fa-expand"></i>
-                                    </div>
-                                    <div class="overlay-text">Click to View Full Catalog</div>
-                                </div>
-                            </div>
-                            <div class="pdf-fallback-preview" id="pdfFallbackPreview">
-                                <div class="fallback-icon">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <h3>PDF Preview</h3>
-                                <p>Preview not available on this device</p>
-                            </div>
-                        </div>
-                        <div class="pdf-info-section">
-                            <div class="pdf-icon">
-                                <i class="fas fa-file-pdf"></i>
-                            </div>
-                            <div class="pdf-preview-text">
-                                <h3>Godrej Product Catalog</h3>
-                                <p>Comprehensive catalog featuring premium home appliances, consumer goods, and
-                                    innovative solutions. Browse through detailed product specifications, features, and
-                                    pricing information.</p>
-                                <button class="preview-play-btn">
-                                    <i class="fas fa-expand"></i>
-                                    View Full Catalog
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- PDF Fullscreen Modal -->
-    <div id="pdfModal" class="pdf-modal">
-        <div class="modal-header">
-            <div class="modal-title">Godrej Product Catalog</div>
-            <div class="modal-controls">
-                <button class="modal-btn" onclick="downloadPDF()">
-                    <i class="fas fa-download"></i> Download
-                </button>
-                <button class="modal-btn" onclick="printModalPDF()">
-                    <i class="fas fa-print"></i> Print
-                </button>
-                <button class="close-modal" onclick="closePDFModal()">&times;</button>
-            </div>
-        </div>
-        <div class="pdf-modal-content">
-            <iframe id="modalPdfViewer" class="modal-pdf-viewer" title="Godrej Product Catalog">
-            </iframe>
-            <div class="modal-fallback" id="modalFallback">
-                <div class="pdf-icon">
-                    <i class="fas fa-file-pdf"></i>
-                </div>
-                <h3>PDF Viewer Not Available</h3>
-                <p>Your browser doesn't support inline PDF viewing. Please download the PDF to view the Godrej product
-                    catalog.</p>
-                <div class="fallback-actions">
-                    <a href="images/godrej/godrej.pdf" download class="pdf-btn">
-                        <i class="fas fa-download"></i>
-                        Download PDF
-                    </a>
-                    <a href="images/godrej/godrej.pdf" target="_blank" class="pdf-btn secondary">
-                        <i class="fas fa-external-link-alt"></i>
-                        Open in New Tab
-                    </a>
-                </div>
-            </div>
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Product Image">
         </div>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // PDF Modal Functions
-        function openPDFModal() {
-            const modal = document.getElementById('pdfModal');
-            const modalViewer = document.getElementById('modalPdfViewer');
+        // Load images when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            loadImages();
+        });
 
-            modal.classList.add('active');
+        function loadImages() {
+            const container = document.getElementById('imagesContainer');
+            const loading = document.getElementById('loading');
+
+            // Hide loading after a short delay
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 500);
+
+            // Create image cards for 15 images
+            for (let i = 1; i <= 15; i++) {
+                const imageCard = document.createElement('div');
+                imageCard.className = 'image-card';
+                imageCard.onclick = function () {
+                    openImageModal(`images/godrej/${i}.jpg`);
+                };
+
+                imageCard.innerHTML = `
+                    <div class="image-wrapper">
+                        <img src="images/godrej/${i}.jpg" alt="Godrej Product ${i}" loading="lazy">
+                        <div class="image-overlay">
+                            <i class="fas fa-search-plus zoom-icon"></i>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(imageCard);
+            }
+        }
+
+        // Image Modal Functions
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+
+            modalImage.src = imageSrc;
+            modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
-
-            // Load PDF in modal iframe
-            modalViewer.src = 'images/godrej/godrej.pdf#toolbar=1&navpanes=1&scrollbar=1&view=FitH';
-
-            // Set up error handling for modal PDF
-            modalViewer.onerror = function () {
-                showModalFallback();
-            };
         }
 
-        function closePDFModal() {
-            const modal = document.getElementById('pdfModal');
-            const modalViewer = document.getElementById('modalPdfViewer');
-
-            modal.classList.remove('active');
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-
-            // Stop loading PDF to improve performance
-            modalViewer.src = '';
         }
 
-        function showModalFallback() {
-            const modalViewer = document.getElementById('modalPdfViewer');
-            const modalFallback = document.getElementById('modalFallback');
-
-            modalViewer.style.display = 'none';
-            modalFallback.classList.add('show');
-        }
-
-        // Download PDF function
-        function downloadPDF() {
-            const link = document.createElement('a');
-            link.href = 'images/godrej/godrej.pdf';
-            link.download = 'Godrej_Product_Catalog.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Print PDF from modal
-        function printModalPDF() {
-            const pdfWindow = window.open('images/godrej/godrej.pdf');
-            pdfWindow.addEventListener('load', function () {
-                pdfWindow.print();
-            });
-        }
-
-        // Print PDF (for main controls)
-        function printPDF() {
-            const pdfWindow = window.open('images/godrej/godrej.pdf');
-            pdfWindow.addEventListener('load', function () {
-                pdfWindow.print();
-            });
-        }
+        // Close modal when clicking the X or outside the image
+        document.querySelector('.close-modal').addEventListener('click', closeImageModal);
+        document.getElementById('imageModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
 
         // Close modal with Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                const modal = document.getElementById('pdfModal');
-                if (modal.classList.contains('active')) {
-                    closePDFModal();
-                }
-            }
-
-            // Keyboard shortcuts
-            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
-                e.preventDefault();
-                downloadPDF();
-            }
-
-            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-                e.preventDefault();
-                printPDF();
-            }
-
-            // Open modal with Enter or Space when preview is focused
-            if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('pdf-preview-container')) {
-                e.preventDefault();
-                openPDFModal();
-            }
-        });
-
-        // Close modal when clicking outside the content
-        document.getElementById('pdfModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closePDFModal();
+                closeImageModal();
             }
         });
 
@@ -989,67 +653,6 @@
                 }
             }
         });
-
-        // Handle mobile devices and PDF compatibility
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add accessibility attributes
-            const previewContainer = document.querySelector('.pdf-preview-container');
-            previewContainer.setAttribute('tabindex', '0');
-            previewContainer.setAttribute('role', 'button');
-            previewContainer.setAttribute('aria-label', 'Open PDF catalog in fullscreen');
-
-            // Add keyboard support for preview
-            previewContainer.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openPDFModal();
-                }
-            });
-
-            // Check PDF thumbnail support
-            const pdfThumbnail = document.getElementById('pdfThumbnail');
-            const fallbackPreview = document.getElementById('pdfFallbackPreview');
-
-            // Set a timeout to check if PDF thumbnail loads
-            setTimeout(function () {
-                checkPDFSupport();
-            }, 3000);
-
-            // Handle PDF thumbnail errors
-            pdfThumbnail.onerror = function () {
-                showThumbnailFallback();
-            };
-
-            // Check for mobile devices that might not support PDF viewing
-            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                setTimeout(function () {
-                    checkPDFSupport();
-                }, 2000);
-            }
-        });
-
-        function checkPDFSupport() {
-            const pdfThumbnail = document.getElementById('pdfThumbnail');
-            try {
-                // Try to access the iframe content
-                if (!pdfThumbnail.contentDocument && !pdfThumbnail.contentWindow) {
-                    showThumbnailFallback();
-                }
-            } catch (e) {
-                // Cross-origin error might still mean PDF is loading
-                // Don't show fallback immediately
-            }
-        }
-
-        function showThumbnailFallback() {
-            const pdfThumbnail = document.getElementById('pdfThumbnail');
-            const fallbackPreview = document.getElementById('pdfFallbackPreview');
-
-            if (pdfThumbnail && fallbackPreview) {
-                pdfThumbnail.style.display = 'none';
-                fallbackPreview.classList.add('show');
-            }
-        }
     </script>
 </body>
 
