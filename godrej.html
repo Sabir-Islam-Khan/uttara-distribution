@@ -231,61 +231,200 @@
             background-color: #2a9086;
         }
 
-        .pdf-container {
+        .pdf-btn.danger {
+            background-color: var(--secondary);
+        }
+
+        .pdf-btn.danger:hover {
+            background-color: #e55656;
+        }
+
+        /* PDF Preview */
+        .pdf-preview-container {
             position: relative;
-            width: 100%;
-            min-height: 800px;
-            background-color: #f5f5f5;
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: 800px;
-            border: none;
-            display: block;
-        }
-
-        .pdf-fallback {
-            display: none;
-            padding: 60px 40px;
-            text-align: center;
-            background-color: white;
-        }
-
-        .pdf-fallback.show {
-            display: block;
-        }
-
-        .pdf-fallback h3 {
-            font-size: 1.5rem;
-            color: var(--dark);
-            margin-bottom: 20px;
-        }
-
-        .pdf-fallback p {
-            color: #5a6474;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .fallback-actions {
+            height: 500px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px dashed #dee2e6;
         }
 
-        .download-icon {
-            width: 80px;
-            height: 80px;
+        .pdf-preview-container:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(74, 109, 229, 0.05) 0%, rgba(56, 178, 172, 0.05) 100%);
+        }
+
+        .pdf-preview-content {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pdf-preview-container:hover .pdf-preview-content {
+            transform: scale(1.05);
+        }
+
+        .pdf-icon {
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 50%;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             color: white;
+            font-size: 3rem;
+            box-shadow: 0 10px 30px rgba(74, 109, 229, 0.3);
+        }
+
+        .pdf-preview-text h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .pdf-preview-text p {
+            color: #5a6474;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .preview-play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .preview-play-btn:hover {
+            background-color: #3a5dd0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 109, 229, 0.4);
+        }
+
+        /* Fullscreen Modal */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .pdf-modal.active {
+            display: block;
+        }
+
+        .modal-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 2001;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .modal-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
             font-size: 2rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .close-modal:hover {
+            opacity: 0.7;
+        }
+
+        .pdf-modal-content {
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-fallback {
+            display: none;
+            padding: 60px 40px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-fallback.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Loading Spinner */
@@ -464,43 +603,28 @@
                         <i class="fas fa-download"></i>
                         Download PDF
                     </a>
-                    <button onclick="openFullscreen()" class="pdf-btn secondary">
-                        <i class="fas fa-expand"></i>
-                        Fullscreen
-                    </button>
-                    <button onclick="printPDF()" class="pdf-btn">
+                    <button onclick="printPDF()" class="pdf-btn secondary">
                         <i class="fas fa-print"></i>
                         Print
                     </button>
+                    <a href="images/godrej/godrej.pdf" target="_blank" class="pdf-btn danger">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open in Tab
+                    </a>
                 </div>
 
-                <div class="pdf-container">
-                    <div class="loading-spinner" id="loadingSpinner">
-                        <div class="spinner"></div>
-                        <div class="loading-text">Loading PDF...</div>
-                    </div>
-
-                    <iframe id="pdfViewer" class="pdf-viewer"
-                        src="images/godrej/godrej.pdf#toolbar=1&navpanes=1&scrollbar=1&view=FitH"
-                        title="Godrej Product Catalog" onload="hideLoading()" onerror="showFallback()">
-                    </iframe>
-
-                    <div class="pdf-fallback" id="pdfFallback">
-                        <div class="download-icon">
+                <div class="pdf-preview-container" onclick="openPDFModal()">
+                    <div class="pdf-preview-content">
+                        <div class="pdf-icon">
                             <i class="fas fa-file-pdf"></i>
                         </div>
-                        <h3>PDF Viewer Not Available</h3>
-                        <p>Your browser doesn't support inline PDF viewing. Please download the PDF to view the Godrej
-                            product catalog on your device.</p>
-                        <div class="fallback-actions">
-                            <a href="images/godrej/godrej.pdf" download class="pdf-btn">
-                                <i class="fas fa-download"></i>
-                                Download PDF
-                            </a>
-                            <a href="images/godrej/godrej.pdf" target="_blank" class="pdf-btn secondary">
-                                <i class="fas fa-external-link-alt"></i>
-                                Open in New Tab
-                            </a>
+                        <div class="pdf-preview-text">
+                            <h3>Godrej Product Catalog</h3>
+                            <p>Click to view the complete product catalog in fullscreen mode</p>
+                            <button class="preview-play-btn">
+                                <i class="fas fa-expand"></i>
+                                View Catalog
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -508,43 +632,101 @@
         </div>
     </main>
 
+    <!-- PDF Fullscreen Modal -->
+    <div id="pdfModal" class="pdf-modal">
+        <div class="modal-header">
+            <div class="modal-title">Godrej Product Catalog</div>
+            <div class="modal-controls">
+                <button class="modal-btn" onclick="downloadPDF()">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <button class="modal-btn" onclick="printModalPDF()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+                <button class="close-modal" onclick="closePDFModal()">&times;</button>
+            </div>
+        </div>
+        <div class="pdf-modal-content">
+            <iframe id="modalPdfViewer" class="modal-pdf-viewer" title="Godrej Product Catalog">
+            </iframe>
+            <div class="modal-fallback" id="modalFallback">
+                <div class="pdf-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>PDF Viewer Not Available</h3>
+                <p>Your browser doesn't support inline PDF viewing. Please download the PDF to view the Godrej product
+                    catalog.</p>
+                <div class="fallback-actions">
+                    <a href="images/godrej/godrej.pdf" download class="pdf-btn">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </a>
+                    <a href="images/godrej/godrej.pdf" target="_blank" class="pdf-btn secondary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open in New Tab
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
-        // Hide loading spinner when PDF loads
-        function hideLoading() {
-            const spinner = document.getElementById('loadingSpinner');
-            if (spinner) {
-                spinner.style.display = 'none';
-            }
+        // PDF Modal Functions
+        function openPDFModal() {
+            const modal = document.getElementById('pdfModal');
+            const modalViewer = document.getElementById('modalPdfViewer');
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Load PDF in modal iframe
+            modalViewer.src = 'images/godrej/godrej.pdf#toolbar=1&navpanes=1&scrollbar=1&view=FitH';
+
+            // Set up error handling for modal PDF
+            modalViewer.onerror = function () {
+                showModalFallback();
+            };
         }
 
-        // Show fallback when PDF fails to load
-        function showFallback() {
-            const spinner = document.getElementById('loadingSpinner');
-            const fallback = document.getElementById('pdfFallback');
-            const viewer = document.getElementById('pdfViewer');
+        function closePDFModal() {
+            const modal = document.getElementById('pdfModal');
+            const modalViewer = document.getElementById('modalPdfViewer');
 
-            if (spinner) spinner.style.display = 'none';
-            if (viewer) viewer.style.display = 'none';
-            if (fallback) fallback.classList.add('show');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            // Stop loading PDF to improve performance
+            modalViewer.src = '';
         }
 
-        // Open PDF in fullscreen
-        function openFullscreen() {
-            const pdfViewer = document.getElementById('pdfViewer');
-            if (pdfViewer.requestFullscreen) {
-                pdfViewer.requestFullscreen();
-            } else if (pdfViewer.webkitRequestFullscreen) {
-                pdfViewer.webkitRequestFullscreen();
-            } else if (pdfViewer.msRequestFullscreen) {
-                pdfViewer.msRequestFullscreen();
-            } else {
-                // Fallback: open in new window
-                window.open('images/godrej/godrej.pdf', '_blank');
-            }
+        function showModalFallback() {
+            const modalViewer = document.getElementById('modalPdfViewer');
+            const modalFallback = document.getElementById('modalFallback');
+
+            modalViewer.style.display = 'none';
+            modalFallback.classList.add('show');
         }
 
-        // Print PDF
+        // Download PDF function
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = 'images/godrej/godrej.pdf';
+            link.download = 'Godrej_Product_Catalog.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Print PDF from modal
+        function printModalPDF() {
+            const pdfWindow = window.open('images/godrej/godrej.pdf');
+            pdfWindow.addEventListener('load', function () {
+                pdfWindow.print();
+            });
+        }
+
+        // Print PDF (for main controls)
         function printPDF() {
             const pdfWindow = window.open('images/godrej/godrej.pdf');
             pdfWindow.addEventListener('load', function () {
@@ -552,32 +734,37 @@
             });
         }
 
-        // Check if PDF loads successfully
-        document.addEventListener('DOMContentLoaded', function () {
-            const pdfViewer = document.getElementById('pdfViewer');
-
-            // Set a timeout to show fallback if PDF doesn't load
-            setTimeout(function () {
-                if (pdfViewer.style.display === 'none' || !pdfViewer.contentDocument) {
-                    // Check if the iframe is actually loaded
-                    try {
-                        if (!pdfViewer.contentDocument && !pdfViewer.contentWindow) {
-                            showFallback();
-                        }
-                    } catch (e) {
-                        // Cross-origin error, but PDF might still be loading
-                        hideLoading();
-                    }
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('pdfModal');
+                if (modal.classList.contains('active')) {
+                    closePDFModal();
                 }
-            }, 5000);
+            }
 
-            // Handle mobile devices that might not support PDF viewing
-            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                setTimeout(function () {
-                    if (document.getElementById('loadingSpinner').style.display !== 'none') {
-                        showFallback();
-                    }
-                }, 3000);
+            // Keyboard shortcuts
+            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                e.preventDefault();
+                downloadPDF();
+            }
+
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                printPDF();
+            }
+
+            // Open modal with Enter or Space when preview is focused
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('pdf-preview-container')) {
+                e.preventDefault();
+                openPDFModal();
+            }
+        });
+
+        // Close modal when clicking outside the content
+        document.getElementById('pdfModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closePDFModal();
             }
         });
 
@@ -628,26 +815,21 @@
             }
         });
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function (e) {
-            // Ctrl/Cmd + D for download
-            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
-                e.preventDefault();
-                const downloadLink = document.querySelector('a[download]');
-                if (downloadLink) downloadLink.click();
-            }
+        // Handle mobile devices and PDF compatibility
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add accessibility attributes
+            const previewContainer = document.querySelector('.pdf-preview-container');
+            previewContainer.setAttribute('tabindex', '0');
+            previewContainer.setAttribute('role', 'button');
+            previewContainer.setAttribute('aria-label', 'Open PDF catalog in fullscreen');
 
-            // F11 for fullscreen
-            if (e.key === 'F11') {
-                e.preventDefault();
-                openFullscreen();
-            }
-
-            // Ctrl/Cmd + P for print
-            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-                e.preventDefault();
-                printPDF();
-            }
+            // Add keyboard support for preview
+            previewContainer.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openPDFModal();
+                }
+            });
         });
     </script>
 </body>
