@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godrej - Product Catalog | Uttara Distribution</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6de5;
+            --secondary: #ff6b6b;
+            --dark: #2d3748;
+            --light: #f8f9fa;
+            --accent: #38b2ac;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            top: 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+        }
+
+        .back-btn:hover {
+            color: white;
+            background-color: var(--primary);
+        }
+
+        .back-btn i {
+            font-size: 1rem;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 90px;
+            padding: 40px 0;
+        }
+
+        /* Brand Header */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(74, 109, 229, 0.05) 0%, rgba(56, 178, 172, 0.05) 100%);
+            padding: 60px 20px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(74, 109, 229, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .brand-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo img {
+            max-width: 70%;
+            max-height: 70%;
+            object-fit: contain;
+        }
+
+        .brand-header h1 {
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-header p {
+            font-size: 1.2rem;
+            color: #5a6474;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* PDF Section */
+        .pdf-section {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .pdf-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .pdf-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .pdf-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .pdf-controls {
+            padding: 20px;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .pdf-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pdf-btn:hover {
+            background-color: #3a5dd0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 109, 229, 0.3);
+        }
+
+        .pdf-btn.secondary {
+            background-color: var(--accent);
+        }
+
+        .pdf-btn.secondary:hover {
+            background-color: #2a9086;
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            min-height: 800px;
+            background-color: #f5f5f5;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+        }
+
+        .pdf-fallback {
+            display: none;
+            padding: 60px 40px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .pdf-fallback.show {
+            display: block;
+        }
+
+        .pdf-fallback h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .pdf-fallback p {
+            color: #5a6474;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .fallback-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(74, 109, 229, 0.1);
+            border-left: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            color: #5a6474;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px 0;
+            }
+
+            .brand-header {
+                padding: 40px 15px;
+            }
+
+            .brand-logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .brand-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .brand-header p {
+                font-size: 1rem;
+            }
+
+            .pdf-viewer {
+                height: 600px;
+            }
+
+            .pdf-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pdf-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            main {
+                margin-top: 120px;
+            }
+
+            .pdf-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .pdf-header p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .brand-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .pdf-viewer {
+                height: 500px;
+            }
+
+            .back-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .pdf-fallback {
+                padding: 40px 20px;
+            }
+
+            .fallback-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pdf-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            header,
+            .pdf-controls,
+            .back-btn {
+                display: none !important;
+            }
+
+            main {
+                margin-top: 0;
+            }
+
+            .pdf-section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Uttara<span>Distribution</span></a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Brand Header -->
+            <div class="brand-header">
+                <div class="brand-logo">
+                    <img src="images/godrej.png" alt="Godrej Logo">
+                </div>
+                <h1>Godrej</h1>
+                <p>Explore our comprehensive Godrej product catalog featuring premium home appliances, consumer goods,
+                    and innovative solutions for modern living.</p>
+            </div>
+
+            <!-- PDF Section -->
+            <div class="pdf-section">
+                <div class="pdf-header">
+                    <h2>Product Catalog</h2>
+                    <p>Browse through our complete Godrej product range and specifications</p>
+                </div>
+
+                <div class="pdf-controls">
+                    <a href="images/godrej/godrej.pdf" download class="pdf-btn">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </a>
+                    <button onclick="openFullscreen()" class="pdf-btn secondary">
+                        <i class="fas fa-expand"></i>
+                        Fullscreen
+                    </button>
+                    <button onclick="printPDF()" class="pdf-btn">
+                        <i class="fas fa-print"></i>
+                        Print
+                    </button>
+                </div>
+
+                <div class="pdf-container">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Loading PDF...</div>
+                    </div>
+
+                    <iframe id="pdfViewer" class="pdf-viewer"
+                        src="images/godrej/godrej.pdf#toolbar=1&navpanes=1&scrollbar=1&view=FitH"
+                        title="Godrej Product Catalog" onload="hideLoading()" onerror="showFallback()">
+                    </iframe>
+
+                    <div class="pdf-fallback" id="pdfFallback">
+                        <div class="download-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>PDF Viewer Not Available</h3>
+                        <p>Your browser doesn't support inline PDF viewing. Please download the PDF to view the Godrej
+                            product catalog on your device.</p>
+                        <div class="fallback-actions">
+                            <a href="images/godrej/godrej.pdf" download class="pdf-btn">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                            <a href="images/godrej/godrej.pdf" target="_blank" class="pdf-btn secondary">
+                                <i class="fas fa-external-link-alt"></i>
+                                Open in New Tab
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Hide loading spinner when PDF loads
+        function hideLoading() {
+            const spinner = document.getElementById('loadingSpinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        }
+
+        // Show fallback when PDF fails to load
+        function showFallback() {
+            const spinner = document.getElementById('loadingSpinner');
+            const fallback = document.getElementById('pdfFallback');
+            const viewer = document.getElementById('pdfViewer');
+
+            if (spinner) spinner.style.display = 'none';
+            if (viewer) viewer.style.display = 'none';
+            if (fallback) fallback.classList.add('show');
+        }
+
+        // Open PDF in fullscreen
+        function openFullscreen() {
+            const pdfViewer = document.getElementById('pdfViewer');
+            if (pdfViewer.requestFullscreen) {
+                pdfViewer.requestFullscreen();
+            } else if (pdfViewer.webkitRequestFullscreen) {
+                pdfViewer.webkitRequestFullscreen();
+            } else if (pdfViewer.msRequestFullscreen) {
+                pdfViewer.msRequestFullscreen();
+            } else {
+                // Fallback: open in new window
+                window.open('images/godrej/godrej.pdf', '_blank');
+            }
+        }
+
+        // Print PDF
+        function printPDF() {
+            const pdfWindow = window.open('images/godrej/godrej.pdf');
+            pdfWindow.addEventListener('load', function () {
+                pdfWindow.print();
+            });
+        }
+
+        // Check if PDF loads successfully
+        document.addEventListener('DOMContentLoaded', function () {
+            const pdfViewer = document.getElementById('pdfViewer');
+
+            // Set a timeout to show fallback if PDF doesn't load
+            setTimeout(function () {
+                if (pdfViewer.style.display === 'none' || !pdfViewer.contentDocument) {
+                    // Check if the iframe is actually loaded
+                    try {
+                        if (!pdfViewer.contentDocument && !pdfViewer.contentWindow) {
+                            showFallback();
+                        }
+                    } catch (e) {
+                        // Cross-origin error, but PDF might still be loading
+                        hideLoading();
+                    }
+                }
+            }, 5000);
+
+            // Handle mobile devices that might not support PDF viewing
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                setTimeout(function () {
+                    if (document.getElementById('loadingSpinner').style.display !== 'none') {
+                        showFallback();
+                    }
+                }, 3000);
+            }
+        });
+
+        // Smooth scroll to top functionality
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) {
+                if (!document.querySelector('.scroll-top')) {
+                    const scrollTop = document.createElement('button');
+                    scrollTop.className = 'scroll-top';
+                    scrollTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                    scrollTop.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        width: 50px;
+                        height: 50px;
+                        background-color: var(--primary);
+                        color: white;
+                        border: none;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        z-index: 1500;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(74, 109, 229, 0.3);
+                    `;
+
+                    scrollTop.addEventListener('click', function () {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+
+                    scrollTop.addEventListener('mouseenter', function () {
+                        scrollTop.style.transform = 'translateY(-3px)';
+                        scrollTop.style.boxShadow = '0 6px 20px rgba(74, 109, 229, 0.4)';
+                    });
+
+                    scrollTop.addEventListener('mouseleave', function () {
+                        scrollTop.style.transform = 'translateY(0)';
+                        scrollTop.style.boxShadow = '0 4px 15px rgba(74, 109, 229, 0.3)';
+                    });
+
+                    document.body.appendChild(scrollTop);
+                }
+            } else {
+                const scrollTop = document.querySelector('.scroll-top');
+                if (scrollTop) {
+                    scrollTop.remove();
+                }
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            // Ctrl/Cmd + D for download
+            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                e.preventDefault();
+                const downloadLink = document.querySelector('a[download]');
+                if (downloadLink) downloadLink.click();
+            }
+
+            // F11 for fullscreen
+            if (e.key === 'F11') {
+                e.preventDefault();
+                openFullscreen();
+            }
+
+            // Ctrl/Cmd + P for print
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                printPDF();
+            }
+        });
+    </script>
+</body>
+
+</html>
