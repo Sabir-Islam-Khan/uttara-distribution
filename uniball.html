@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniball - Product Gallery | Uttara Distribution</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6de5;
+            --secondary: #ff6b6b;
+            --dark: #2d3748;
+            --light: #f8f9fa;
+            --accent: #38b2ac;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            top: 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+        }
+
+        .back-btn:hover {
+            color: white;
+            background-color: var(--primary);
+        }
+
+        .back-btn i {
+            font-size: 1rem;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 90px;
+            padding: 40px 0;
+        }
+
+        /* Brand Header */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, rgba(74, 109, 229, 0.05) 0%, rgba(56, 178, 172, 0.05) 100%);
+            padding: 60px 20px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(74, 109, 229, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .brand-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo img {
+            max-width: 70%;
+            max-height: 70%;
+            object-fit: contain;
+        }
+
+        .brand-header h1 {
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-header p {
+            font-size: 1.2rem;
+            color: #5a6474;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Product Gallery */
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #5a6474;
+            margin-top: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(74, 109, 229, 0.8), rgba(56, 178, 172, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .zoom-icon {
+            color: white;
+            font-size: 2rem;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .zoom-icon {
+            transform: scale(1);
+        }
+
+        /* Modal for Image Preview */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: opacity 0.3s ease;
+        }
+
+        .close-modal:hover {
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(74, 109, 229, 0.1);
+            border-left: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px 0;
+            }
+
+            .brand-header {
+                padding: 40px 15px;
+            }
+
+            .brand-logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .brand-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .brand-header p {
+                font-size: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            main {
+                margin-top: 120px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .brand-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+
+            .back-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Uttara<span>Distribution</span></a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Brand Header -->
+            <div class="brand-header">
+                <div class="brand-logo">
+                    <img src="images/uniball.jpeg" alt="Uniball Logo">
+                </div>
+                <h1>Uniball</h1>
+                <p>Explore the premium Uniball product collection. Experience world-class writing instruments known for
+                    their smooth ink flow, precision, and reliability. From everyday writing to professional use,
+                    Uniball delivers exceptional quality.</p>
+            </div>
+
+            <!-- Product Gallery -->
+            <div class="gallery-section">
+                <div class="section-title">
+                    <h2>Product Gallery</h2>
+                    <p>Browse through our complete collection of Uniball products</p>
+                </div>
+
+                <div id="productGrid" class="product-grid">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Product Image">
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Product data
+        const products = [];
+        for (let i = 1; i <= 6; i++) {
+            products.push({
+                id: i,
+                name: `Uniball Product ${i}`,
+                image: `images/uniball/${i}.jpg`,
+                description: 'Premium Uniball writing instrument'
+            });
+        }
+
+        // DOM elements
+        const productGrid = document.getElementById('productGrid');
+        const loading = document.getElementById('loading');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Load products
+        function loadProducts() {
+            setTimeout(() => {
+                loading.style.display = 'none';
+
+                products.forEach((product, index) => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.style.animationDelay = `${index * 0.1}s`;
+
+                    productCard.innerHTML = `
+                        <div class="product-image">
+                            <img src="${product.image}" alt="Uniball Product ${product.id}" loading="lazy">
+                            <div class="product-overlay">
+                                <i class="fas fa-search-plus zoom-icon"></i>
+                            </div>
+                        </div>
+                    `;
+
+                    // Add click event for modal
+                    productCard.addEventListener('click', () => {
+                        openModal(product.image, `Uniball Product ${product.id}`);
+                    });
+
+                    productGrid.appendChild(productCard);
+
+                    // Animate card appearance
+                    setTimeout(() => {
+                        productCard.style.opacity = '1';
+                        productCard.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 1000);
+        }
+
+        // Modal functions
+        function openModal(imageSrc, altText) {
+            modalImage.src = imageSrc;
+            modalImage.alt = altText;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModalFunc() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event listeners
+        closeModal.addEventListener('click', closeModalFunc);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeModalFunc();
+            }
+        });
+
+        // Handle image load errors
+        document.addEventListener('error', (e) => {
+            if (e.target.tagName === 'IMG') {
+                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OTk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4=';
+                e.target.parentElement.parentElement.style.opacity = '0.5';
+            }
+        }, true);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add initial styles for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                .product-card {
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: all 0.6s ease;
+                }
+            `;
+            document.head.appendChild(style);
+
+            loadProducts();
+        });
+
+        // Smooth scroll to top functionality
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                if (!document.querySelector('.scroll-top')) {
+                    const scrollTop = document.createElement('button');
+                    scrollTop.className = 'scroll-top';
+                    scrollTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                    scrollTop.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        width: 50px;
+                        height: 50px;
+                        background-color: var(--primary);
+                        color: white;
+                        border: none;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        z-index: 1500;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(74, 109, 229, 0.3);
+                    `;
+
+                    scrollTop.addEventListener('click', () => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+
+                    scrollTop.addEventListener('mouseenter', () => {
+                        scrollTop.style.transform = 'translateY(-3px)';
+                        scrollTop.style.boxShadow = '0 6px 20px rgba(74, 109, 229, 0.4)';
+                    });
+
+                    scrollTop.addEventListener('mouseleave', () => {
+                        scrollTop.style.transform = 'translateY(0)';
+                        scrollTop.style.boxShadow = '0 4px 15px rgba(74, 109, 229, 0.3)';
+                    });
+
+                    document.body.appendChild(scrollTop);
+                }
+            } else {
+                const scrollTop = document.querySelector('.scroll-top');
+                if (scrollTop) {
+                    scrollTop.remove();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
